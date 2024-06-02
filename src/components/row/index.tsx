@@ -12,27 +12,14 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-
-interface Transaction {
-  TransactionID: string;
-  TransactionDate: string;
-  TransactionAmount: string;
-}
-
-interface Customer {
-  CustomerID: string;
-  Name: string;
-  Surname: string;
-  BirthDate: string;
-  GSMNumber: string;
-  CardNumber: string;
-}
+import { Customer, Transaction } from '../../types/types';
 
 interface RowProps {
   row: Customer & { transactions: Transaction[] };
 }
 
 const Row: React.FC<RowProps> = ({ row }) => {
+  console.log("row:", row)
   const [open, setOpen] = useState(false);
   const [showCardNumber, setShowCardNumber] = useState(false);
 
@@ -81,7 +68,7 @@ const Row: React.FC<RowProps> = ({ row }) => {
                         <TableCell component="th" scope="row">
                           {transaction.TransactionDate}
                         </TableCell>
-                        <TableCell align="right">${transaction.TransactionAmount}</TableCell>
+                        <TableCell align="right">{transaction.TransactionAmount}</TableCell>
                       </TableRow>
                     ))
                   ) : (
