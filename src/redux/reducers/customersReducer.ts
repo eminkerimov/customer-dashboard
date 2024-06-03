@@ -1,14 +1,7 @@
-// customersReducer.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Customer } from "../../types/types";
+import { Customer, CustomersState } from "../../types/types";
 import { fetchCustomers } from '../actions/customersActions';
-
-interface CustomersState {
-  customers: Customer[];
-  filteredCustomers: Customer[];
-  loading: boolean;
-  error: string | null;
-}
+import { toast } from 'react-toastify';
 
 const initialState: CustomersState = {
   customers: [],
@@ -28,10 +21,12 @@ export const customersSlice = createSlice({
     addCustomer: (state, action: PayloadAction<Customer>) => {
       state.customers.push(action.payload);
       state.filteredCustomers.push(action.payload);
+      toast.success('Customer added successfully');
     },
     deleteCustomer: (state, action: PayloadAction<string>) => {
       state.customers = state.customers.filter(customer => customer.CustomerID !== action.payload);
       state.filteredCustomers = state.filteredCustomers.filter(customer => customer.CustomerID !== action.payload);
+      toast.success('Customer deleted successfully');
     },
     filterCustomers: (state, action: PayloadAction<string>) => {
       state.filteredCustomers = state.customers.filter(c =>

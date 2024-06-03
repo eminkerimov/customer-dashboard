@@ -11,39 +11,41 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Row from "../../components/row/index";
 import Pagination from "@mui/material/Pagination";
-import { filterCustomers } from "../../redux/reducers/customersReducer";
+import {
+  deleteCustomer,
+  filterCustomers,
+} from "../../redux/reducers/customersReducer";
 import { AppDispatch, RootState } from "../../redux/store";
 import { fetchCustomers } from "../../redux/actions/customersActions";
 import { fetchTransactions } from "../../redux/actions/transactionsActions";
 import MainButton from "../../components/mainButton";
 import SecondaryButton from "../../components/secondaryButton";
-import "./index.scss"
+import "./index.scss";
+import { Typography } from "@mui/material";
 
 const CollapsibleTable: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
 
   const dispatch = useDispatch<AppDispatch>();
-  const {
-    filteredCustomers: customers,
-  } = useSelector((state: RootState) => state.customers);
+  const { filteredCustomers: customers } = useSelector(
+    (state: RootState) => state.customers
+  );
 
-  const {
-    transactions,
-  } = useSelector((state: RootState) => state.transactions);
+  const { transactions } = useSelector(
+    (state: RootState) => state.transactions
+  );
 
   useEffect(() => {
     dispatch(fetchCustomers());
     dispatch(fetchTransactions());
-  }, [dispatch]);
+  }, []);
 
   const handleSearch = () => {
     dispatch(filterCustomers(searchQuery));
   };
 
   const getCustomerTransactions = (customerID: string) => {
-    console.log("customerID:", customerID);
-    console.log(transactions.filter((t) => t.CustomerID === customerID));
     return transactions.filter((t) => t.CustomerID === customerID);
   };
 
@@ -64,10 +66,19 @@ const CollapsibleTable: React.FC = () => {
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
+    console.log(event);
     setPage(value);
   };
 
-  const rowsPerPage = 5;
+  const handleRemoveCard = (customerID: string, reason: string) => {
+    console.log(
+      `Card removed for CustomerID: ${customerID}, Reason: ${reason}`
+    );
+
+    dispatch(deleteCustomer(customerID));
+  };
+
+  const rowsPerPage = 10;
   const lastIndex = page * rowsPerPage;
   const firstIndex = lastIndex - rowsPerPage;
   const paginatedCustomers = customers.slice(firstIndex, lastIndex);
@@ -93,6 +104,7 @@ const CollapsibleTable: React.FC = () => {
           variant="contained"
           onClick={handleSearch}
           className="mainBtn"
+          disabled={!searchQuery}
         >
           Search
         </MainButton>
@@ -104,7 +116,7 @@ const CollapsibleTable: React.FC = () => {
           Clear
         </SecondaryButton>
       </Box>
-      <TableContainer component={Paper}  className="customTable">
+      <TableContainer component={Paper} className="customTable">
         <Table aria-label="collapsible table">
           <TableHead>
             <TableRow>
@@ -113,6 +125,7 @@ const CollapsibleTable: React.FC = () => {
               <TableCell>Birth Date</TableCell>
               <TableCell>GSM Number</TableCell>
               <TableCell>Card Number</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -124,10 +137,22 @@ const CollapsibleTable: React.FC = () => {
                     ...customer,
                     transactions: getCustomerTransactions(customer.CustomerID),
                   }}
+                  onRemoveCard={handleRemoveCard}
                 />
               ))
             ) : (
-              <Box display="flex" alignItems="center" justifyContent="center">NO DATA FOUND</Box>
+              <TableRow>
+                <TableCell
+                  colSpan={6}
+                  style={{
+                    textAlign: "center",
+                    paddingTop: "200px",
+                    border: "none",
+                  }}
+                >
+                  <Typography variant="body1">NO DATA FOUND</Typography>
+                </TableCell>
+              </TableRow>
             )}
           </TableBody>
         </Table>

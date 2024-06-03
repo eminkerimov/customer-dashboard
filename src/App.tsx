@@ -9,6 +9,8 @@ import "./App.scss";
 import PurpleLoader from "./components/loader";
 import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App: React.FC = () => {
   const { loading: loadingCustomers } = useSelector(
@@ -32,6 +34,7 @@ const App: React.FC = () => {
           </Routes>
         </Main>
       </div>
+      <ToastContainer />
     </Router>
   );
 };

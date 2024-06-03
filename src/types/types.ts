@@ -14,3 +14,22 @@ export interface Customer {
     TransactionAmount: string;
   }
   
+  export interface TransactionsState {
+    transactions: Transaction[];
+    loading: boolean;
+    error: string | null;
+  }
+  export interface CustomersState {
+    customers: Customer[];
+    filteredCustomers: Customer[];
+    loading: boolean;
+    error: string | null;
+  }
+
+  export interface Register {
+    surname: string;
+    birthDate: string;
+    gsmNumber: string;
+    cardNumber: string;
+    name: string;
+  }

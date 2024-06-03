@@ -1,12 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { Transaction } from "../../types/types";
-
-interface TransactionsState {
-  transactions: Transaction[];
-  loading: boolean;
-  error: string | null;
-}
+import { Transaction, TransactionsState } from "../../types/types";
 
 const initialState: TransactionsState = {
   transactions: [],
@@ -14,7 +8,6 @@ const initialState: TransactionsState = {
   error: null,
 };
 
-// Define the async thunk for fetching transactions
 export const fetchTransactions = createAsyncThunk<Transaction[]>(
   "transactions/fetchTransactions",
   async () => {

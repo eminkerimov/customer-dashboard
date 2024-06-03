@@ -1,8 +1,19 @@
 .createCustomer {
-    padding: 100px;
-
-    input {
-        width: 200px;
-        margin-bottom: 20px;
-    }
+    padding: 20px 80px;
 }
+
+.cardImageContainer {
+    position: relative;
+  }
+  
+  .cardImage {
+    width: 500px;
+  }
+  
+  .cardNumberInput {
+    position: absolute;
+    top: 70%;
+    right: 50%;
+    background: #fff;
+  }
+  
