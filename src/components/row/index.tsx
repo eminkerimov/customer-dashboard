@@ -25,6 +25,7 @@ import InputLabel from "@mui/material/InputLabel";
 import { Customer, Transaction } from "../../types/types";
 import MainButton from "../mainButton";
 import SecondaryButton from "../secondaryButton";
+import { useTranslation } from "react-i18next";
 
 interface RowProps {
   row: Customer & { transactions: Transaction[] };
@@ -32,6 +33,7 @@ interface RowProps {
 }
 
 const Row: React.FC<RowProps> = ({ row, onRemoveCard }) => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [showCardNumber, setShowCardNumber] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -94,13 +96,13 @@ const Row: React.FC<RowProps> = ({ row, onRemoveCard }) => {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                Transactions
+              {t('transactions')}
               </Typography>
               <Table size="small" aria-label="transactions">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell align="right">Amount</TableCell>
+                    <TableCell>{t('date')}</TableCell>
+                    <TableCell align="right">{t('amount')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -118,7 +120,7 @@ const Row: React.FC<RowProps> = ({ row, onRemoveCard }) => {
                   ) : (
                     <TableRow>
                       <TableCell colSpan={2} align="center">
-                        No transactions found
+                      {t('noTransactionsFound')}
                       </TableCell>
                     </TableRow>
                   )}
@@ -134,24 +136,24 @@ const Row: React.FC<RowProps> = ({ row, onRemoveCard }) => {
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle>Cancel Debit Card</DialogTitle>
+        <DialogTitle>{t('cancelDebitCard')}</DialogTitle>
         <DialogContent>
           <FormControl fullWidth margin="dense">
-            <InputLabel>Cancellation Reason</InputLabel>
+            <InputLabel>{t('cancellationReason')}</InputLabel>
             <Select
               value={reasonType}
               onChange={(e) => setReasonType(e.target.value)}
               label="Cancellation Reason"
             >
-              <MenuItem value="Front office agent">Front office agent</MenuItem>
-              <MenuItem value="Call Center agent">Call Center agent</MenuItem>
-              <MenuItem value="other">Other</MenuItem>
+              <MenuItem value="Front office agent">{t('frontOfficeAgent')}</MenuItem>
+              <MenuItem value="Call Center agent">{t('callCenterAgent')}</MenuItem>
+              <MenuItem value="other">{t('other')}</MenuItem>
             </Select>
           </FormControl>
           {reasonType === "other" && (
             <TextField
               margin="dense"
-              label="Specify Reason"
+              label={t(`specifyReason`)}
               fullWidth
               variant="outlined"
               value={customReason}
@@ -161,14 +163,14 @@ const Row: React.FC<RowProps> = ({ row, onRemoveCard }) => {
         </DialogContent>
         <DialogActions>
           <SecondaryButton onClick={() => setDialogOpen(false)}>
-            Cancel
+          {t('cancel')}
           </SecondaryButton>
           <MainButton
             onClick={handleRemoveCard}
             color="primary"
             disabled={!reasonType || (reasonType == "other" && !customReason)}
           >
-            Confirm
+            {t('confirm')}
           </MainButton>
         </DialogActions>
       </Dialog>

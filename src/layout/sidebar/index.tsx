@@ -15,6 +15,7 @@ const Sidebar: React.FC = () => {
   const links: LinkItem[] = [
     { path: "/", label: t('customerList') },
     { path: "/create", label: t('createCustomer') },
+    { path: "/logs", label: t('logs') },
   ];
 
   return (

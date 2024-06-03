@@ -18,12 +18,14 @@ export interface Customer {
     transactions: Transaction[];
     loading: boolean;
     error: string | null;
+    logs:Logs[]
   }
   export interface CustomersState {
     customers: Customer[];
     filteredCustomers: Customer[];
     loading: boolean;
     error: string | null;
+    logs: Logs[]
   }
 
   export interface Register {
@@ -32,4 +34,9 @@ export interface Customer {
     gsmNumber: string;
     cardNumber: string;
     name: string;
+  }
+
+  export interface Logs {
+    message:string;
+    timestamp:number
   }

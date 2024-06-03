@@ -3,6 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
 import { Grid, TextField } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import "./style.scss";
 import { Customer, Register } from "../../types/types";
 import { addCustomer } from "../../redux/reducers/customersReducer";
@@ -11,15 +12,19 @@ import Card from "../../assets/images/new-card.png";
 import MainButton from "../../components/mainButton";
 import SecondaryButton from "../../components/secondaryButton";
 
-const schema = yup.object().shape({
-  name: yup.string().required("Name is required"),
-  surname: yup.string().required("Surname is required"),
-  birthDate: yup.string().required("Birth date is required"),
-  gsmNumber: yup.string().required("GSM Number is required"),
-  cardNumber: yup.string().required("Debit Card Number is required"),
-});
-
 const CreateCustomer = () => {
+  const { t } = useTranslation();
+
+  const schema = yup.object().shape({
+    name: yup.string().required(t("name") + " " + t("isRequired")),
+    surname: yup.string().required(t("surname") + " " + t("isRequired")),
+    birthDate: yup.string().required(t("birthDate") + " " + t("isRequired")),
+    gsmNumber: yup.string().required(t("gsmNumber") + " " + t("isRequired")),
+    cardNumber: yup
+      .string()
+      .required(t("debitCardNumber") + " " + t("isRequired")),
+  });
+
   const {
     register,
     handleSubmit,
@@ -50,16 +55,21 @@ const CreateCustomer = () => {
   };
 
   const inputFields = [
-    { label: "Name", type: "text", name: "name", error: errors.name },
-    { label: "Surname", type: "text", name: "surname", error: errors.surname },
+    { label: t("name"), type: "text", name: "name", error: errors.name },
     {
-      label: "Birth Date",
+      label: t("surname"),
+      type: "text",
+      name: "surname",
+      error: errors.surname,
+    },
+    {
+      label: t("birthDate"),
       type: "date",
       name: "birthDate",
       error: errors.birthDate,
     },
     {
-      label: "GSM Number",
+      label: t("gsmNumber"),
       type: "text",
       name: "gsmNumber",
       error: errors.gsmNumber,
@@ -82,11 +92,11 @@ const CreateCustomer = () => {
         ))}
         <Grid item xs={10}>
           <SecondaryButton variant="contained" onClick={generateCardNumber}>
-            Generate Debit Card
+            {t("generateDebitCard")}
           </SecondaryButton>
         </Grid>
         <Grid item xs={10} className="cardImageContainer">
-          <img src={Card} alt="Card" className="cardImage" />
+          <img src={Card} alt={t("cardImageAlt")} className="cardImage" />
           <TextField
             {...register("cardNumber")}
             className="cardNumberInput"
@@ -98,7 +108,7 @@ const CreateCustomer = () => {
         </Grid>
         <Grid item xs={10}>
           <MainButton type="submit" variant="contained" color="primary">
-            Create Customer
+            {t("createCustomer")}
           </MainButton>
         </Grid>
       </Grid>

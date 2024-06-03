@@ -1,26 +1,13 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, PayloadAction} from '@reduxjs/toolkit';
 import { Transaction, TransactionsState } from "../../types/types";
+import { fetchTransactions } from '../actions/transactionsActions';
 
 const initialState: TransactionsState = {
   transactions: [],
   loading: false,
   error: null,
+  logs:[]
 };
-
-export const fetchTransactions = createAsyncThunk<Transaction[]>(
-  "transactions/fetchTransactions",
-  async () => {
-    try {
-      const response = await axios.get<Transaction[]>(
-        import.meta.env.VITE_REACT_APP_TRANSACTION_LIST_API
-      );
-      return response.data;
-    } catch (error) {
-      throw new Error("Failed to fetch transactions");
-    }
-  }
-);
 
 export const transactionsSlice = createSlice({
   name: 'transactions',
@@ -34,6 +21,7 @@ export const transactionsSlice = createSlice({
     builder.addCase(fetchTransactions.fulfilled, (state, action: PayloadAction<Transaction[]>) => {
       state.transactions = action.payload;
       state.loading = false;
+      state.logs.push({ message: 'Transactions fetched', timestamp: Date.now() })
     });
     builder.addCase(fetchTransactions.rejected, (state, action) => {
       state.loading = false;

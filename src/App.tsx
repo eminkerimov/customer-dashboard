@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LogViewer from "./pages/logViewer";
 
 const App: React.FC = () => {
   const { loading: loadingCustomers } = useSelector(
@@ -31,6 +32,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/create" element={<CreateCustomer />} />
             <Route path="/" element={<CustomerList />} />
+            <Route path="/logs" element={<LogViewer />} />
           </Routes>
         </Main>
       </div>

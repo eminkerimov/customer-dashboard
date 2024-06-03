@@ -22,8 +22,10 @@ import MainButton from "../../components/mainButton";
 import SecondaryButton from "../../components/secondaryButton";
 import "./index.scss";
 import { Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const CollapsibleTable: React.FC = () => {
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
 
@@ -39,7 +41,7 @@ const CollapsibleTable: React.FC = () => {
   useEffect(() => {
     dispatch(fetchCustomers());
     dispatch(fetchTransactions());
-  }, []);
+  }, [dispatch]);
 
   const handleSearch = () => {
     dispatch(filterCustomers(searchQuery));
@@ -93,7 +95,7 @@ const CollapsibleTable: React.FC = () => {
         m={3}
       >
         <TextField
-          label="Search by Name"
+          label={t("searchByName")}
           variant="outlined"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -106,14 +108,14 @@ const CollapsibleTable: React.FC = () => {
           className="mainBtn"
           disabled={!searchQuery}
         >
-          Search
+          {t("search")}
         </MainButton>
         <SecondaryButton
           variant="contained"
           onClick={handleClearSearch}
           className="mainBtn"
         >
-          Clear
+          {t("clear")}
         </SecondaryButton>
       </Box>
       <TableContainer component={Paper} className="customTable">
@@ -121,11 +123,11 @@ const CollapsibleTable: React.FC = () => {
           <TableHead>
             <TableRow>
               <TableCell />
-              <TableCell>Name</TableCell>
-              <TableCell>Birth Date</TableCell>
-              <TableCell>GSM Number</TableCell>
-              <TableCell>Card Number</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>{t("name")}</TableCell>
+              <TableCell>{t("birthDate")}</TableCell>
+              <TableCell>{t("gsmNumber")}</TableCell>
+              <TableCell>{t("cardNumber")}</TableCell>
+              <TableCell>{t("actions")}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -150,7 +152,7 @@ const CollapsibleTable: React.FC = () => {
                     border: "none",
                   }}
                 >
-                  <Typography variant="body1">NO DATA FOUND</Typography>
+                  <Typography variant="body1">{t("noDataFound")}</Typography>
                 </TableCell>
               </TableRow>
             )}

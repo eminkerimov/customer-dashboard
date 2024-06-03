@@ -1,6 +1,32 @@
 {
     "welcome": "Xoş gəlmisiniz!",
     "createCustomer": "Müştəri Yaradın",
-    "customerList": "Müştəri Siyahısı"
+    "customerList": "Müştəri Siyahısı",
+    "logs": "Loglar",
+    "transactions": "Tranzaksiyalar",
+    "amount": "Məbləğ",
+    "date": "Tarix",
+    "noTransactionsFound": "Əməliyyatlar tapılmadı",
+    "cancelDebitCard": "Debet kartı ləğv et",
+    "callCenterAgent": "Çağrı Mərkəzinin agenti",
+    "other": "Digər",
+    "cancel": "Ləğv et",
+    "confirm": "Təsdiq et",
+    "cancellationReason": "Ləğv etmə səbəbi",
+    "frontOfficeAgent": "Ön ofis agenti",
+    "specifyReason": "Səbəbi göstər",
+    "searchByName": "Ada görə axtarış",
+    "search": "Axtarış",
+    "clear": "Təmizlə",
+    "name": "Ad",
+    "surname": "Soyad",
+    "birthDate": "Doğum Tarixi",
+    "gsmNumber": "GSM Nömrəsi",
+    "cardNumber": "Kart Nömrəsi",
+    "actions": "Əməliyyatlar",
+    "noDataFound": "MƏLUMAT TAPILMADI",
+    "generateDebitCard": "Debet Kart Yarat",
+    "isRequired": "mütləqdir",
+    "debitCardNumber": "Debet Kart Nömrəsi"
   }
   

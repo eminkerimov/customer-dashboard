@@ -1,6 +1,32 @@
 {
     "welcome": "Welcome!",
     "createCustomer": "Create Customer",
-    "customerList": "Customer List"
+    "customerList": "Customer List",
+    "logs": "Logs",
+    "transactions": "Transactions",
+    "amount": "Amount",
+    "date": "Date",
+    "noTransactionsFound": "No transactions found",
+    "cancelDebitCard": "Cancel Debit Card",
+    "callCenterAgent": "Call Center agent",
+    "other": "Other",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "cancellationReason": "Cancellation Reason",
+    "frontOfficeAgent": "Front office agent",
+    "specifyReason": "Specify Reason",
+    "searchByName":"Search by Name",
+    "search":"Search",
+    "clear":"Clear",
+    "name":"Name",
+    "surname":"Surname",
+    "birthDate":"Birth Date",
+    "gsmNumber":"GSM Number",
+    "cardNumber":"Card Number",
+    "actions":"Actions",
+    "noDataFound":"NO DATA FOUND",
+    "generateDebitCard":"Generate Debit Card",
+    "isRequired":"is required",
+    "debitCardNumber":"Debit Card Number"
   }
   
