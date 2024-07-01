@@ -6,7 +6,7 @@ const LogViewer = () => {
   const customerLogs = useSelector((state:RootState) => state.customers.logs);
   const transactionLogs = useSelector((state:RootState) => state.transactions.logs);
 
-  const formatTimestamp = (timestamp) => {
+  const formatTimestamp = (timestamp: string | number | Date) => {
     const date = new Date(timestamp);
     if (isNaN(date.getTime())) {
       return 'Invalid Date'; // Return a placeholder for invalid dates
